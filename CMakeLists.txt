@@ -32,35 +32,23 @@ endif ()
 # 添加std的模块支持。需要从上边这个目录里复制std.ixx过来。
 # vs 17.5 preview 开始支持，需要安装组件：适用于v143生成工具的c++模块（x64/x86-实验性）
 # https://learn.microsoft.com/en-us/cpp/cpp/tutorial-import-stl-named-module?view=msvc-170
-
+# std 模块
 add_library(std_ixx)
 target_sources(std_ixx
         PUBLIC
         FILE_SET std_ixx_all TYPE CXX_MODULES
         FILES std.ixx)
-
-# fmt
-#FetchContent_Declare(fmt
-#        GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-#        GIT_TAG master
-#        )
-#FetchContent_MakeAvailable(fmt)
-#find_package(fmt)
-
-#
-#add_subdirectory(utils)
-#
-#add_library(tmp)
-#target_sources(tmp
-#        PUBLIC
-#        FILE_SET tmp_all TYPE CXX_MODULES
-#        FILES tmp/max_value.ixx tmp/push_back.ixx tmp/my_fmt.ixx tmp/ranges.ixx)
-#target_link_libraries(tmp std_ixx)
-
-add_executable(main main.cpp)
-target_link_libraries(main std_ixx)
-
 ##
 #  https://www.kitware.com/import-cmake-c20-modules/
 # VCToolsInstallDir  std.ixx要复制过来
 # 裸漏的ixx文件，不能直接add进去，要通过target_sources添加进FILE_SET
+
+add_executable(main main.cpp)
+target_link_libraries(main std_ixx)
+
+############################ modules ###########################################
+# 该模块包括若干部分
+# 第一部分：初试module
+## 该部分包含一个square模块和一个main.cpp，cmake的可执行程序为 modules_0
+# 第二部分：
+add_subdirectory(modules)
