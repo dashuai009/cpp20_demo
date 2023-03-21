@@ -1,8 +1,7 @@
 import std;
-import Square;  // import module ``Square''
+import Square;  // import module 'Square'
 
-int main()
-{
+int main(){
     Square x = toSquare(42);
     std::cout << x.getValue() << '\n';
 }
